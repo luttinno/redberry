@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 
 const FirstSection = () => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [isBorderVisible1, setIsBorderVisible1] = useState(false);
   const [isBorderVisible2, setIsBorderVisible2] = useState(false);
   const [isBorderVisible3, setIsBorderVisible3] = useState(false);
@@ -33,6 +33,34 @@ const FirstSection = () => {
     setIsBorderVisible6((prevState) => !prevState);
   };
 
+  // useEffect(() => {
+  //   axios
+  //     .get("https://api.blog.redberryinternship.ge/api/blogs", {
+  //       headers: {
+  //         Authorization: `Bearer f588e1ea4ab749169c32af4183b3bd955467fa1692f8ce7939fa6ddd8befe960`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       const getData = response.data.data;
+  //       setData(getData);
+  //       console.log(getData);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
+
+  // const filteredData = (cate) => {
+  //   setData(
+  //     data.filter((item) => {
+  //       return item.categories.some((category) => category.id === cate);
+  //     })
+  //   );
+  // };
+
+  const [originalData, setOriginalData] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
   useEffect(() => {
     axios
       .get("https://api.blog.redberryinternship.ge/api/blogs", {
@@ -42,21 +70,36 @@ const FirstSection = () => {
       })
       .then((response) => {
         const getData = response.data.data;
-        setData(getData);
-        console.log(getData);
+        setOriginalData(getData);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  const filteredData = (cate) => {
-    setData(
-      data.filter((item) => {
-        return item.categories.some((category) => category.id === cate);
-      })
-    );
+  const handleToggleFilter = (categoryId) => {
+    // Check if the category is already selected
+    const isCategorySelected = selectedCategories.includes(categoryId);
+
+    // Update the selected categories array
+    if (isCategorySelected) {
+      setSelectedCategories((prevCategories) =>
+        prevCategories.filter((id) => id !== categoryId)
+      );
+    } else {
+      setSelectedCategories((prevCategories) => [
+        ...prevCategories,
+        categoryId,
+      ]);
+    }
   };
+
+  // Apply filters to the original data based on selected category IDs
+  const filteredData = originalData.filter((item) =>
+    selectedCategories.every((categoryId) =>
+      item.categories.some((category) => category.id === categoryId)
+    )
+  );
 
   return (
     <>
@@ -73,7 +116,7 @@ const FirstSection = () => {
           <ul className="w-[684px] h-[32px] top-[328px] left-[378px] gap-[24px] flex flex-row absolute">
             <li
               onClick={() => {
-                filteredData(1);
+                handleToggleFilter(1);
                 toggleBorder1();
               }}
               style={{
@@ -85,7 +128,7 @@ const FirstSection = () => {
             </li>
             <li
               onClick={() => {
-                filteredData(2);
+                handleToggleFilter(2);
                 toggleBorder2();
               }}
               style={{
@@ -97,7 +140,7 @@ const FirstSection = () => {
             </li>
             <li
               onClick={() => {
-                filteredData(3);
+                handleToggleFilter(3);
                 toggleBorder3();
               }}
               style={{
@@ -109,7 +152,7 @@ const FirstSection = () => {
             </li>
             <li
               onClick={() => {
-                filteredData(4);
+                handleToggleFilter(4);
                 toggleBorder4();
               }}
               style={{
@@ -121,7 +164,7 @@ const FirstSection = () => {
             </li>
             <li
               onClick={() => {
-                filteredData(5);
+                handleToggleFilter(5);
                 toggleBorder5();
               }}
               style={{
@@ -133,7 +176,7 @@ const FirstSection = () => {
             </li>
             <li
               onClick={() => {
-                filteredData(6);
+                handleToggleFilter(6);
                 toggleBorder6();
               }}
               style={{
@@ -149,7 +192,7 @@ const FirstSection = () => {
       <div className="bg-[#F3F2FA] bg-cover">
         <div className="w-[1440px] h-[2714px] flex justify-center bg-[#F3F2FA] m-auto">
           <div className="w-[1288px] h-[2648px] bg-[#F3F2FA] grid grid-cols-[repeat(3,_1fr)] grid-rows-[repeat(4,_1fr)] gap-y-[56px] gap-x-[32px] ">
-            {data.map((item) => (
+            {filteredData.map((item) => (
               <Card
                 key={item.id}
                 auth={item.author}
