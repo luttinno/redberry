@@ -1,18 +1,7 @@
 import React from "react";
 import Arrow from "../images/Arrow.svg";
 
-const Card = ({
-  image,
-  auth,
-  date,
-  title,
-  cate,
-  cate2,
-  cate3,
-  cate4,
-  cate5,
-  desc,
-}) => {
+const Card = ({ image, auth, date, title, cate, desc }) => {
   return (
     <div className="w-[408px] h-[620px] bg-[#F3F2FA] text-center rounded-[12px] relative">
       <img
