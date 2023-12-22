@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 
 const FirstSection = () => {
-  // const [data, setData] = useState([]);
   const [isBorderVisible1, setIsBorderVisible1] = useState(false);
   const [isBorderVisible2, setIsBorderVisible2] = useState(false);
   const [isBorderVisible3, setIsBorderVisible3] = useState(false);
@@ -33,33 +32,12 @@ const FirstSection = () => {
     setIsBorderVisible6((prevState) => !prevState);
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get("https://api.blog.redberryinternship.ge/api/blogs", {
-  //       headers: {
-  //         Authorization: `Bearer f588e1ea4ab749169c32af4183b3bd955467fa1692f8ce7939fa6ddd8befe960`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       const getData = response.data.data;
-  //       setData(getData);
-  //       console.log(getData);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
-  // const filteredData = (cate) => {
-  //   setData(
-  //     data.filter((item) => {
-  //       return item.categories.some((category) => category.id === cate);
-  //     })
-  //   );
-  // };
-
   const [originalData, setOriginalData] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState(() => {
+    // Initialize selectedCategories with stored value from localStorage, or an empty array if not present
+    const storedCategories = localStorage.getItem("selectedCategories");
+    return storedCategories ? JSON.parse(storedCategories) : [];
+  });
 
   useEffect(() => {
     axios
@@ -77,11 +55,17 @@ const FirstSection = () => {
       });
   }, []);
 
+  useEffect(() => {
+    // Store selectedCategories in localStorage whenever it changes
+    localStorage.setItem(
+      "selectedCategories",
+      JSON.stringify(selectedCategories)
+    );
+  }, [selectedCategories]);
+
   const handleToggleFilter = (categoryId) => {
-    // Check if the category is already selected
     const isCategorySelected = selectedCategories.includes(categoryId);
 
-    // Update the selected categories array
     if (isCategorySelected) {
       setSelectedCategories((prevCategories) =>
         prevCategories.filter((id) => id !== categoryId)
@@ -94,7 +78,6 @@ const FirstSection = () => {
     }
   };
 
-  // Apply filters to the original data based on selected category IDs
   const filteredData = originalData.filter((item) =>
     selectedCategories.every((categoryId) =>
       item.categories.some((category) => category.id === categoryId)
