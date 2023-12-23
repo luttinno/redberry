@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import BlogPage from "./pages/BlogPage";
+
+import MoreAbout from "./components/MoreAbout";
 
 const router = createBrowserRouter([
   {
@@ -11,8 +12,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "blog",
-    element: <BlogPage />,
+    path: "/more",
+    element: <MoreAbout />,
   },
 ]);
 

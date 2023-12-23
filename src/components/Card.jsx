@@ -1,7 +1,14 @@
 import React from "react";
 import Arrow from "../images/Arrow.svg";
+import { Link, useNavigate } from "react-router-dom";
 
 const Card = ({ image, auth, date, title, cate, desc }) => {
+  const navigate = useNavigate();
+
+  const handleViewFull = () => {
+    const cardData = { image, auth, date, title, cate, desc };
+    navigate("/more", { state: { cardData } });
+  };
   return (
     <div className="w-[408px] h-[620px] bg-[#F3F2FA] text-center rounded-[12px] relative">
       <img
@@ -54,9 +61,13 @@ const Card = ({ image, auth, date, title, cate, desc }) => {
         {desc}
       </p>
       <div>
-        <h4 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#5D37F3] absolute bottom-[-1px] left-0">
-          სრულად ნახვა
+        <h4
+          onClick={handleViewFull}
+          className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#5D37F3] absolute bottom-[-1px] left-0"
+        >
+          <Link to="/more"> სრულად ნახვა</Link>
         </h4>
+
         <img
           src={Arrow}
           alt="sml-arrow"
