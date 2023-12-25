@@ -65,7 +65,7 @@ const Card = ({ image, auth, date, title, cate, desc }) => {
           onClick={handleViewFull}
           className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#5D37F3] absolute bottom-[-1px] left-0"
         >
-          <Link to="/more"> სრულად ნახვა</Link>
+          <Link> სრულად ნახვა</Link>
         </h4>
 
         <img
