@@ -93,7 +93,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
       <div className="bg-cover bg-[#FBFAFF] h-[1078px] pt-10  ">
         <form
           onSubmit={handleSubmit}
-          className="w-[600px] h-[928px] relative m-auto translate translate-x-[-60px] "
+          className="w-[600px] h-[962px] relative m-auto translate translate-x-[-60px] "
         >
           <h1 className="font-[FiraGO] text-[32px] font-bold leading-[40px] tracking-normal text-left absolute top-0 left-0 ">
             ბლოგის დამატება
@@ -177,7 +177,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
               მინიმუმ 2 სიმბოლო
             </li>
           </ul>
-          <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute top-[680px] left-0 ">
+          <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[276px] left-0 ">
             გამოქვეყნების თარიღი *
           </h2>
           <input
@@ -186,9 +186,9 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             min="2023-29-12"
             max="2024-12-31"
             onChange={handleDateChange}
-            className="w-[288px] h-[44px] rounded-[12px] border-[1px] border-[#E4E3EB] font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#1A1A1F] bg-[#FCFCFD] absolute bottom-[176px] pl-[16px] pr-[16px] flex flex-row-reverse "
+            className="w-[288px] h-[44px] rounded-[12px] border-[1px] border-[#E4E3EB] font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#1A1A1F] bg-[#FCFCFD] absolute bottom-[210px] pl-[16px] pr-[16px] flex flex-row-reverse "
           />
-          <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[228px] right-[201px] ">
+          <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[276px] right-[201px] ">
             კატეგორია *
           </h2>
           <MultiSelectCategories />
@@ -197,7 +197,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             ელ-ფოსტა
           </h2>
           <input
-            className="w-[288px] h-[44px] bg-[#F7F7FF] border-[#5D37F3] border-[1.5px] rounded-[12px] pl-4 focus:outline-[#5D37F3] absolute bottom-[80px] left-0 "
+            className="w-[288px] h-[44px] bg-[#F7F7FF] border-[#5D37F3] border-[1.5px] rounded-[12px] pl-4 focus:outline-[#5D37F3] absolute bottom-[114px] left-0 "
             placeholder="Example@redberry.ge"
             type="email"
             id="email"
