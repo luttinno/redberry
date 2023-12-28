@@ -11,7 +11,6 @@ const MoreAbout = () => {
   const { state } = location;
   const [cardData, setCardData] = useState(null);
   const [originalData, setOriginalData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch data from the backend when the component mounts
@@ -24,11 +23,9 @@ const MoreAbout = () => {
       .then((response) => {
         const getData = response.data.data;
         setOriginalData(getData);
-        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false);
       });
 
     // Set card data if available
@@ -37,14 +34,8 @@ const MoreAbout = () => {
     }
   }, [state]);
 
-  if (loading) {
-    // Show a loading state
-    return <p>Loading...</p>;
-  }
-
   if (!cardData) {
-    // Data is not available yet, render a message or nothing
-    return <p>No card data found.</p>;
+    return <></>;
   }
 
   const { image, auth, date, title, cate, desc } = cardData;
@@ -71,7 +62,7 @@ const MoreAbout = () => {
               <img
                 src={image}
                 alt="pic"
-                className="w-full h-[328px] object-cover rounded-[12px]"
+                className="w-full h-[328px] object-cover  rounded-[12px] "
               />
               <p className="font-[FiraGO] text-[16px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute top-[408px] left-0">
                 {auth}
