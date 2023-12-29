@@ -9,6 +9,7 @@ import FileUpload from "./FileUpload";
 
 const BlogUploadForm = ({ onUpload, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [error, setError] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [inputValue2, setInputValue2] = useState("");
@@ -81,26 +82,47 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
       setSelectedDate(savedValue4);
     }
   }, []);
+  const handleFileChange = (e) => {
+    setSelectedFile(e);
+    console.log("addBlogs----------", e);
+  };
+  useEffect(() => {
+    const savedSelectedFile = localStorage.getItem("selectedFile");
+
+    // If there is a saved file, set the state
+    if (savedSelectedFile) {
+      setSelectedFile(JSON.parse(savedSelectedFile));
+      console.log(savedSelectedFile);
+    }
+  }, []);
+
+  const selectCategories = (categories) => {
+    setSelectedCategories(categories);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!selectedFile) {
-      setError("Please select a file to upload.");
-      return;
-    }
-
     try {
       const formData = new FormData();
-      formData.append("file", selectedFile);
+      formData.append("title", inputValue2);
+      formData.append("description", inputValue3);
+      formData.append("image", selectedFile);
+      formData.append("author", inputValue);
+      formData.append("publish_date", selectedDate);
+      // Replace with the actual category IDs
+      formData.append("email", "gigagiorgadze@redberry.ge");
+      formData.append("categories", selectedCategories);
 
       // Send formData to your API endpoint for handling the upload
       const response = await axios.post(
-        "YOUR_API_ENDPOINT", // Replace with your actual API endpoint
+        "https://api.blog.redberryinternship.ge/api/blogs",
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization:
+              "Bearer f588e1ea4ab749169c32af4183b3bd955467fa1692f8ce7939fa6ddd8befe960",
           },
         }
       );
@@ -160,7 +182,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             ატვირთეთ ფოტო
           </h2>
 
-          <FileUpload />
+          <FileUpload handleChange={(arg) => handleFileChange(arg)} />
 
           <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute top-[312px] left-0 ">
             ავტორი *
@@ -301,8 +323,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
           <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[276px] right-[201px] ">
             კატეგორია *
           </h2>
-          <MultiSelectCategories />
-
+          <MultiSelectCategories handleChange={(e) => selectCategories(e)} />
           <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[165px] left-0 ">
             ელ-ფოსტა
           </h2>

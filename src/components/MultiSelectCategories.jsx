@@ -43,7 +43,7 @@ const CustomSelect = ({ options, selected, onSelect, categoryStyles }) => {
   );
 };
 
-const MultiSelectCategories = () => {
+const MultiSelectCategories = ({ handleChange }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -73,6 +73,10 @@ const MultiSelectCategories = () => {
     // Add more styles as needed
   };
 
+  const getSelectedCategoryIds = () => {
+    return JSON.stringify(selectedCategories.map((e, i) => i + 1));
+  };
+
   useEffect(() => {
     // Retrieve values from localStorage on component mount
     const savedSelectedCategories = localStorage.getItem("selectedCategories");
@@ -89,11 +93,13 @@ const MultiSelectCategories = () => {
     if (category && !selectedCategories.includes(category)) {
       const updatedCategories = [...selectedCategories, category];
       setSelectedCategories(updatedCategories);
+      console.log(selectedCategories);
       // Save to localStorage whenever the state changes
       localStorage.setItem(
         "selectedCategories",
         JSON.stringify(updatedCategories)
       );
+      handleChange(getSelectedCategoryIds());
     }
   };
 
@@ -107,6 +113,7 @@ const MultiSelectCategories = () => {
       "selectedCategories",
       JSON.stringify(updatedCategories)
     );
+    handleChange(getSelectedCategoryIds());
   };
 
   return (
@@ -117,7 +124,6 @@ const MultiSelectCategories = () => {
         onSelect={handleCategoryChange}
         categoryStyles={categoryStyles}
       />
-
       <ul className="flex flex-row absolute left-0 flex-wrap ">
         {selectedCategories.map((category) => (
           <li key={category} className={` ${categoryStyles[category]}`}>

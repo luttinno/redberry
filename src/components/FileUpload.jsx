@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import upload from "../images/upload.svg";
 
-const FileUpload = () => {
+const FileUpload = ({ handleChange }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
@@ -13,16 +13,16 @@ const FileUpload = () => {
       setSelectedFile(JSON.parse(savedSelectedFile));
     }
   }, []);
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile({ file, name: file.name });
-
+    console.log("fileUpload----", file);
     // Save the selected file and its name to local storage
     localStorage.setItem(
       "selectedFile",
       JSON.stringify({ file, name: file.name })
     );
+    handleChange(file);
   };
 
   const handleCancelUpload = () => {
