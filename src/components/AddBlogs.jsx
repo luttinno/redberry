@@ -5,6 +5,7 @@ import MultiSelectCategories from "./MultiSelectCategories";
 import { Link } from "react-router-dom";
 import Logo from "../images/Logo.svg";
 import back from "../images/back-2.svg";
+import EmailInput from "./EmailInput";
 
 const BlogUploadForm = ({ onUpload, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -103,11 +104,12 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
     }
   };
 
-  const [selectedDate, setSelectedDate] = useState("2023-12-12");
+  const [selectedDate, setSelectedDate] = useState("");
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
+  const isDateSelected = selectedDate !== "";
 
   return (
     <>
@@ -297,29 +299,27 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             min="2023-29-12"
             max="2024-12-31"
             onChange={handleDateChange}
-            className="w-[288px] h-[44px] rounded-[12px] border-[1px] border-[#E4E3EB] font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#1A1A1F] bg-[#FCFCFD] absolute bottom-[210px] pl-[16px] pr-[16px] flex flex-row-reverse "
+            className={`w-[288px] h-[44px] rounded-[12px] border-[1px] border-[#E4E3EB] font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#1A1A1F] bg-[#FCFCFD] absolute bottom-[210px] pl-[16px] pr-[16px] flex flex-row-reverse ${
+              isDateSelected
+                ? "border-[#14D81C] bg-[#F8FFF8]"
+                : "border-[#E4E3EB]"
+            } focus:outline-none `}
           />
           <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[276px] right-[201px] ">
             კატეგორია *
           </h2>
           <MultiSelectCategories />
 
-          <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[132px] left-0 ">
+          <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute bottom-[165px] left-0 ">
             ელ-ფოსტა
           </h2>
-          <input
-            className="w-[288px] h-[44px] bg-[#F7F7FF] border-[#5D37F3] border-[1.5px] rounded-[12px] pl-4 focus:outline-[#5D37F3] absolute bottom-[114px] left-0 "
-            placeholder="Example@redberry.ge"
-            type="email"
-            id="email"
-            required
-          />
+          <EmailInput />
 
           {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
 
           <button
             type="submit"
-            className="w-[288px] h-[40px] absolute right-0 bottom-0 text-[#FFFFFF] bg-[#E4E3EB] font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-center rounded-[8px] "
+            className="w-[288px] h-[40px] absolute right-0 bottom-0 text-[#FFFFFF] bg-[#E4E3EB] font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-center rounded-[8px] hover:bg-[#5D37F3] [transition:0.5s_ease-in-out] "
           >
             გამოქვეყნება
           </button>
