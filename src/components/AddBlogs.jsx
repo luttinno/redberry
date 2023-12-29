@@ -155,7 +155,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
     <>
       <div className="bg-[#FFFFFF] bg-cover  border-b-[#E4E3EB] border-b-[1px] sticky top-0 z-50">
         <div className="w-[1440px] h-[80px] bg-[#FFFFFF] flex flex-row relative justify-center items-center m-auto ">
-          <Link to="/">
+          <Link to="/redberry">
             <img
               src={Logo}
               alt="logo"
@@ -166,7 +166,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
       </div>
 
       <button className="absolute top-[120px] left-[308px] ">
-        <Link to="/">
+        <Link to="/redberry">
           <img src={back} alt="bck" className="bg-[#E4E3EB] rounded-[24px]" />
         </Link>
       </button>

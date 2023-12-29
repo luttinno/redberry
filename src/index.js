@@ -9,7 +9,7 @@ import AddBlogs from "./components/AddBlogs";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/redberry",
     element: <App />,
   },
   {

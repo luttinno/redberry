@@ -54,7 +54,7 @@ const MoreAbout = () => {
         <div className="w-[1440px] h-[1290px] m-auto">
           <div className="w-[1440px] h-[1290px] relative bg-[#F3F2FA] ">
             <button className="w-[44px] h-[44px] absolute top-[40px] left-[76px] bg-[#FFFFFF] rounded-[24px] ">
-              <Link to="/">
+              <Link to="/redberry">
                 <img src={back} alt="back" />
               </Link>
             </button>

@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <div className="bg-[#FFFFFF] bg-cover  border-b-[#E4E3EB] border-b-[1px] sticky top-0 z-50">
       <div className="w-[1440px] h-[80px] bg-[#FFFFFF] flex flex-row relative m-auto ">
-        <Link to="/">
+        <Link to="/redberry">
           <img
             src={Logo}
             alt="logo"
