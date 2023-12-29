@@ -56,7 +56,31 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
     if (savedValue) {
       setInputValue(savedValue);
     }
-  }, []); // The empty dependency array ensures this effect runs only on mount
+  }, []);
+  useEffect(() => {
+    const savedValue2 = localStorage.getItem("inputFieldValue2");
+
+    // If there is a saved value, set the state
+    if (savedValue2) {
+      setInputValue2(savedValue2);
+    }
+  }, []);
+  useEffect(() => {
+    const savedValue3 = localStorage.getItem("inputFieldValue3");
+
+    // If there is a saved value, set the state
+    if (savedValue3) {
+      setInputValue3(savedValue3);
+    }
+  }, []);
+  useEffect(() => {
+    const savedValue4 = localStorage.getItem("inputFieldValue4");
+
+    // If there is a saved value, set the state
+    if (savedValue4) {
+      setSelectedDate(savedValue4);
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -101,6 +125,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
+    localStorage.setItem("inputFieldValue4", event.target.value);
   };
   const isDateSelected = selectedDate !== "";
 
@@ -201,6 +226,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             value={inputValue2}
             onChange={(e) => {
               setInputValue2(e.target.value);
+              localStorage.setItem("inputFieldValue2", e.target.value);
               validateInput2();
             }}
             className={`font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[288px] h-[44px] border-[1px]  border-[#E4E3EB] absolute top-[340px] right-0 pl-[16px] rounded-[12px] focus:outline-none ${
@@ -233,6 +259,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             value={inputValue3}
             onChange={(e) => {
               setInputValue3(e.target.value);
+              localStorage.setItem("inputFieldValue3", e.target.value);
               validateInput3();
             }}
             className={`font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[600px] h-[124px] border-[1px]  border-[#E4E3EB] absolute top-[504px] right-0 pl-[16px] rounded-[12px] focus:outline-none resize-none ${
