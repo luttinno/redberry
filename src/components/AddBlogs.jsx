@@ -9,6 +9,25 @@ import back from "../images/back-2.svg";
 const BlogUploadForm = ({ onUpload, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [isTouched, setIsTouched] = useState(false);
+
+  // Validation States
+  const [isValidSymbol, setIsValidSymbol] = useState(true);
+  const [isValidWord, setIsValidWord] = useState(true);
+  const [isValidGeorgian, setIsValidGeorgian] = useState(true);
+
+  const validateInput = () => {
+    setIsTouched(true);
+
+    const georgianRegex = /^[\u10D0-\u10FA\s]+$/; // Georgian Unicode range
+    const words = inputValue.split(/\s+/);
+
+    // Validate each condition separately
+    setIsValidSymbol(inputValue.length >= 3);
+    setIsValidWord(words.length >= 2);
+    setIsValidGeorgian(georgianRegex.test(inputValue));
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -138,16 +157,51 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
           <input
             type="text"
             placeholder="შეიყვნეთ ავტორი"
-            className="font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[288px] h-[44px] border-[1px]  border-[#E4E3EB] absolute top-[340px] left-0 pl-[16px] rounded-[12px] focus:outline-[#5D37F3] "
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+              validateInput();
+            }}
+            className={`font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[288px] h-[44px] border-[1px]  border-[#E4E3EB] absolute top-[340px] left-0 pl-[16px] rounded-[12px] focus:outline-none ${
+              isTouched
+                ? isValidSymbol && isValidGeorgian
+                  ? "border-green-500 text-green-500 bg-[#F8FFF8]"
+                  : "border-red-500 text-red-500 bg-[#FAF2F3]"
+                : "border-grey text-grey"
+            } `}
           />
           <ol className="absolute top-[392px] left-[16px] list-disc w-[216px] h-[60px] ">
-            <li className="text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left">
+            <li
+              className={`text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left ${
+                isTouched
+                  ? isValidSymbol && isValidGeorgian
+                    ? "text-green-500 bg-[#F8FFF8]"
+                    : "text-red-500 bg-[#FAF2F3]"
+                  : "text-grey"
+              }`}
+            >
               მინიმუმ 4 სიმბოლო
             </li>
-            <li className="text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left">
+            <li
+              className={`text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left ${
+                isTouched
+                  ? isValidWord
+                    ? "text-green-500 bg-[#F8FFF8]"
+                    : "text-red-500 bg-[#FAF2F3]"
+                  : "text-grey"
+              }`}
+            >
               მინიმუმ ორი სიტყვა
             </li>
-            <li className="text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left">
+            <li
+              className={`text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left ${
+                isTouched
+                  ? isValidGeorgian
+                    ? "text-green-500 bg-[#F8FFF8]"
+                    : "text-red-500 bg-[#FAF2F3]"
+                  : "text-grey"
+              }`}
+            >
               მხოლოდ ქართული სიმბოლოები
             </li>
           </ol>
