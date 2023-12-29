@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MultiSelectCategories from "./MultiSelectCategories";
 import { Link } from "react-router-dom";
@@ -48,6 +48,15 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
     setIsValidWord(words.length >= 2);
     setIsValidGeorgian(georgianRegex.test(inputValue));
   };
+
+  useEffect(() => {
+    const savedValue = localStorage.getItem("inputFieldValue");
+
+    // If there is a saved value, set the state
+    if (savedValue) {
+      setInputValue(savedValue);
+    }
+  }, []); // The empty dependency array ensures this effect runs only on mount
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -137,6 +146,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
+              localStorage.setItem("inputFieldValue", e.target.value);
               validateInput();
             }}
             className={`font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[288px] h-[44px] border-[1px]  border-[#E4E3EB] absolute top-[340px] left-0 pl-[16px] rounded-[12px] focus:outline-none ${

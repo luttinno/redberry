@@ -17,7 +17,7 @@ const EmailInput = () => {
     <input
       className={`w-[288px] h-[44px] ${
         isEmailValid
-          ? "bg-[#269726] border-green-500"
+          ? "bg-[#F8FFF8] border-green-500"
           : "bg-white border-gray-300"
       } border rounded-[12px] pl-4 focus:outline-none absolute bottom-[114px] left-0 z-10`}
       placeholder="Example@redberry.ge"
