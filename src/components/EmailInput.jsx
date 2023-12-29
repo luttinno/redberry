@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const EmailInput = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [selectedEmail, setSelectedEmail] = useState("");
+
+  useEffect(() => {
+    const savedValue5 = localStorage.getItem("inputFieldValue5");
+
+    // If there is a saved value, set the state
+    if (savedValue5) {
+      setSelectedEmail(savedValue5);
+    }
+  }, []);
 
   const handleEmailChange = (e) => {
     const enteredEmail = e.target.value;
@@ -11,6 +21,8 @@ const EmailInput = () => {
 
     // Update email validation state
     setIsEmailValid(isValidFormat);
+    setSelectedEmail(enteredEmail);
+    localStorage.setItem("inputFieldValue5", e.target.value);
   };
 
   return (
@@ -25,6 +37,7 @@ const EmailInput = () => {
       id="email"
       required
       onChange={handleEmailChange}
+      value={selectedEmail} // Set the value prop to control the input field
     />
   );
 };
