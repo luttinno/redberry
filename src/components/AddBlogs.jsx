@@ -1,4 +1,3 @@
-import upload from "../images/upload.svg";
 import React, { useState } from "react";
 import axios from "axios";
 import MultiSelectCategories from "./MultiSelectCategories";
@@ -6,6 +5,7 @@ import { Link } from "react-router-dom";
 import Logo from "../images/Logo.svg";
 import back from "../images/back-2.svg";
 import EmailInput from "./EmailInput";
+import FileUpload from "./FileUpload";
 
 const BlogUploadForm = ({ onUpload, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -47,22 +47,6 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
     setIsValidSymbol(inputValue.length >= 3);
     setIsValidWord(words.length >= 2);
     setIsValidGeorgian(georgianRegex.test(inputValue));
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
-
-  const handleDrop = (event) => {
-    event.preventDefault();
-
-    const file = event.dataTransfer.files[0];
-    setSelectedFile(file);
   };
 
   const handleSubmit = async (event) => {
@@ -142,36 +126,8 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             ატვირთეთ ფოტო
           </h2>
 
-          {/* Drag-and-drop area */}
-          <div
-            className="border-dashed border-2 border-gray-300   rounded-[12px] text-center w-[600px] h-[180px] bg-[#F4F3FF] flex justify-evenly items-center flex-col absolute top-[108px] left-0 "
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-          >
-            <img src={upload} alt="upload" />
-            <label
-              htmlFor="fileUpload"
-              className="cursor-pointer block mb-4 text-sm font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left"
-            >
-              ჩააგდეთ ფაილი აქ ან{" "}
-              <span className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left underline text-[#1A1A1F] ">
-                აირჩიეთ ფაილი
-              </span>
-            </label>
+          <FileUpload />
 
-            {/* File input */}
-            <input
-              type="file"
-              id="fileUpload"
-              onChange={handleFileChange}
-              accept="image/*"
-              className="hidden"
-            />
-
-            {selectedFile && (
-              <p className="text-gray-600">{selectedFile.name}</p>
-            )}
-          </div>
           <h2 className="font-[FiraGO] text-[14px] font-medium leading-[20px] tracking-normal text-left text-[#1A1A1F] absolute top-[312px] left-0 ">
             ავტორი *
           </h2>
@@ -301,7 +257,7 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
             onChange={handleDateChange}
             className={`w-[288px] h-[44px] rounded-[12px] border-[1px] border-[#E4E3EB] font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#1A1A1F] bg-[#FCFCFD] absolute bottom-[210px] pl-[16px] pr-[16px] flex flex-row-reverse ${
               isDateSelected
-                ? "border-[#14D81C] bg-[#F8FFF8]"
+                ? "border-green-500 bg-[#F8FFF8]"
                 : "border-[#E4E3EB]"
             } focus:outline-none `}
           />

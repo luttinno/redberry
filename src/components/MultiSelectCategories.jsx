@@ -13,10 +13,8 @@ const CustomSelect = ({ options, selected, onSelect, categoryStyles }) => {
     <div className="custom-select">
       {isCategorySelected ? (
         <input
-          className={`w-[288px] h-[64px] border-[1px] border-[#E4E3EB] rounded-[12px] text-[#85858D] font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left pl-4 focus:outline-none ${
-            isCategorySelected
-              ? "border-[#14D81C] bg-[#F8FFF8]"
-              : "border-[#E4E3EB]"
+          className={`w-[288px] h-[64px] border-[1px]  rounded-[12px] text-[#85858D] font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left pl-4 focus:outline-none border-[#14D81C] ${
+            isCategorySelected ? " bg-[#F8FFF8]" : "border-[#E4E3EB]"
           }`}
           onClick={() => setIsOpen(!isOpen)}
         ></input>
