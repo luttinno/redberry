@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import upload from "../images/upload.svg";
+
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
+  useEffect(() => {
+    // Retrieve the selected file and its name from local storage on component mount
+    const savedSelectedFile = localStorage.getItem("selectedFile");
+
+    // If there is a saved file, set the state
+    if (savedSelectedFile) {
+      setSelectedFile(JSON.parse(savedSelectedFile));
+    }
+  }, []);
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
+    setSelectedFile({ file, name: file.name });
+
+    // Save the selected file and its name to local storage
+    localStorage.setItem(
+      "selectedFile",
+      JSON.stringify({ file, name: file.name })
+    );
   };
 
   const handleCancelUpload = () => {
     setSelectedFile(null);
     // Optionally, you can also reset the file input value
     document.getElementById("fileUpload").value = "";
+
+    // Remove the selected file and its name from local storage
+    localStorage.removeItem("selectedFile");
   };
 
   const handleDragOver = (e) => {
@@ -21,7 +41,13 @@ const FileUpload = () => {
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    setSelectedFile(file);
+    setSelectedFile({ file, name: file.name });
+
+    // Save the selected file and its name to local storage
+    localStorage.setItem(
+      "selectedFile",
+      JSON.stringify({ file, name: file.name })
+    );
   };
 
   return (
