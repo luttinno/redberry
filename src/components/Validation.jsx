@@ -6,19 +6,12 @@ const App = () => {
 
   // Validation States
   const [isValidSymbol, setIsValidSymbol] = useState(true);
-  const [isValidWord, setIsValidWord] = useState(true);
-  const [isValidGeorgian, setIsValidGeorgian] = useState(true);
 
   const validateInput = () => {
     setIsTouched(true);
 
-    const georgianRegex = /^[\u10D0-\u10FA\s]+$/; // Georgian Unicode range
-    const words = inputValue.split(/\s+/);
-
     // Validate each condition separately
-    setIsValidSymbol(inputValue.length >= 3);
-    setIsValidWord(words.length >= 2);
-    setIsValidGeorgian(georgianRegex.test(inputValue));
+    setIsValidSymbol(inputValue.length >= 1); // Update to 2 symbols for validity
   };
 
   return (
@@ -34,7 +27,7 @@ const App = () => {
         }}
         className={`focus:outline-none border p-2 ${
           isTouched
-            ? isValidSymbol && isValidGeorgian
+            ? isValidSymbol
               ? "border-green-500 text-green-500 bg-[#F8FFF8]"
               : "border-red-500 text-red-500 bg-[#FAF2F3]"
             : "border-grey text-grey"
@@ -44,37 +37,13 @@ const App = () => {
         <li
           className={`inline-block text-sm ${
             isTouched
-              ? isValidSymbol && isValidGeorgian
+              ? isValidSymbol
                 ? "text-green-500 bg-[#F8FFF8]"
                 : "text-red-500 bg-[#FAF2F3]"
               : "text-grey"
           }`}
         >
-          მინიმუმ 4 სიმბოლო
-        </li>{" "}
-        <br />
-        <li
-          className={`inline-block text-sm ${
-            isTouched
-              ? isValidWord
-                ? "text-green-500 bg-[#F8FFF8]"
-                : "text-red-500 bg-[#FAF2F3]"
-              : "text-grey"
-          }`}
-        >
-          მინიმუმ 2 სიტყვა
-        </li>{" "}
-        <br />
-        <li
-          className={`inline-block text-sm ${
-            isTouched
-              ? isValidGeorgian
-                ? "text-green-500 bg-[#F8FFF8]"
-                : "text-red-500 bg-[#FAF2F3]"
-              : "text-grey"
-          }`}
-        >
-          მხოლოდ ქართული სიმბოლოები
+          მინიმუმ 2 სიმბოლო
         </li>
       </ul>
     </div>

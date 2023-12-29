@@ -10,12 +10,31 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState(null);
   const [inputValue, setInputValue] = useState("");
+  const [inputValue2, setInputValue2] = useState("");
+  const [inputValue3, setInputValue3] = useState("");
   const [isTouched, setIsTouched] = useState(false);
+  const [isTouched2, setIsTouched2] = useState(false);
+  const [isTouched3, setIsTouched3] = useState(false);
 
   // Validation States
   const [isValidSymbol, setIsValidSymbol] = useState(true);
   const [isValidWord, setIsValidWord] = useState(true);
   const [isValidGeorgian, setIsValidGeorgian] = useState(true);
+  const [isValidSymbol2, setIsValidSymbol2] = useState(true);
+  const [isValidSymbol3, setIsValidSymbol3] = useState(true);
+  const validateInput2 = () => {
+    setIsTouched2(true);
+
+    // Validate each condition separately
+    setIsValidSymbol2(inputValue2.length >= 1); // Update to 2 symbols for validity
+  };
+
+  const validateInput3 = () => {
+    setIsTouched3(true);
+
+    // Validate each condition separately
+    setIsValidSymbol3(inputValue3.length >= 1); // Update to 2 symbols for validity
+  };
 
   const validateInput = () => {
     setIsTouched(true);
@@ -211,10 +230,29 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
           <input
             type="text"
             placeholder="შეიყვნეთ სათაური"
-            className="font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[288px] h-[44px] border-[1px]  border-[#E4E3EB] absolute top-[340px] right-0 pl-[16px] rounded-[12px] focus:outline-[#5D37F3] "
+            value={inputValue2}
+            onChange={(e) => {
+              setInputValue2(e.target.value);
+              validateInput2();
+            }}
+            className={`font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[288px] h-[44px] border-[1px]  border-[#E4E3EB] absolute top-[340px] right-0 pl-[16px] rounded-[12px] focus:outline-none ${
+              isTouched2
+                ? isValidSymbol2
+                  ? "border-green-500 text-green-500 bg-[#F8FFF8]"
+                  : "border-red-500 text-red-500 bg-[#FAF2F3]"
+                : "border-grey text-grey"
+            }`}
           />
           <ul className="absolute top-[392px] right-[169px] ">
-            <li className="text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left">
+            <li
+              className={`text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left ${
+                isTouched2
+                  ? isValidSymbol2
+                    ? "border-green-500 text-green-500 bg-[#F8FFF8]"
+                    : "border-red-500 text-red-500 bg-[#FAF2F3]"
+                  : "border-grey text-grey"
+              }`}
+            >
               მინიმუმ 2 სიმბოლო
             </li>
           </ul>
@@ -224,10 +262,29 @@ const BlogUploadForm = ({ onUpload, onClose }) => {
           <textarea
             type="text"
             placeholder="შეიყვნეთ აღწერა"
-            className="font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[600px] h-[124px] border-[1px]  border-[#E4E3EB] absolute top-[504px] right-0 pl-[16px] rounded-[12px] focus:outline-[#5D37F3] resize-none "
+            value={inputValue3}
+            onChange={(e) => {
+              setInputValue3(e.target.value);
+              validateInput3();
+            }}
+            className={`font-[FiraGO] text-[14px] font-normal leading-[20px] tracking-normal text-left text-[#85858D] w-[600px] h-[124px] border-[1px]  border-[#E4E3EB] absolute top-[504px] right-0 pl-[16px] rounded-[12px] focus:outline-none resize-none ${
+              isTouched3
+                ? isValidSymbol3
+                  ? "border-green-500 text-green-500 bg-[#F8FFF8]"
+                  : "border-red-500 text-red-500 bg-[#FAF2F3]"
+                : "border-grey text-grey"
+            } `}
           ></textarea>
           <ul className="absolute top-[636px] left-0 ">
-            <li className="text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left">
+            <li
+              className={`text-[#85858D] font-[FiraGO] text-[12px] font-normal leading-[20px] tracking-normal text-left ${
+                isTouched3
+                  ? isValidSymbol3
+                    ? "border-green-500 text-green-500 bg-[#F8FFF8]"
+                    : "border-red-500 text-red-500 bg-[#FAF2F3]"
+                  : "border-grey text-grey"
+              }`}
+            >
               მინიმუმ 2 სიმბოლო
             </li>
           </ul>
