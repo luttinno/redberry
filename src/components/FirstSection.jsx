@@ -173,8 +173,8 @@ const FirstSection = () => {
         </div>
       </div>
       <div className="bg-[#F3F2FA] bg-cover">
-        <div className="w-[1440px] h-[2714px] flex justify-center bg-[#F3F2FA] m-auto">
-          <div className="w-[1288px] h-[2648px] bg-[#F3F2FA] grid grid-cols-[repeat(3,_1fr)] grid-rows-[repeat(4,_1fr)] gap-y-[56px] gap-x-[32px] ">
+        <div className="w-[1440px]  flex justify-center bg-[#F3F2FA] m-auto">
+          <div className="w-[1288px] bg-[#F3F2FA] grid grid-cols-[repeat(3,_1fr)] grid-rows-[repeat(4,_1fr)] gap-y-[56px] gap-x-[32px] ">
             {filteredData.map((item) => (
               <Card
                 key={item.id}
