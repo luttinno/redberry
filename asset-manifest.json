@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/redberry/static/css/main.5183b28f.css",
-    "main.js": "/redberry/static/js/main.efb11f45.js",
+    "main.css": "/redberry/static/css/main.960c6b1f.css",
+    "main.js": "/redberry/static/js/main.d0f971ad.js",
     "static/media/Blog.svg": "/redberry/static/media/Blog.6fc570c99a849a8b406bf72385c09dd6.svg",
     "static/media/Logo.svg": "/redberry/static/media/Logo.672b7475fec1e5e35e6f47117889d1f6.svg",
     "static/media/upload.svg": "/redberry/static/media/upload.aeb8ec3496327aa90408cbeac7d2da19.svg",
@@ -11,11 +11,11 @@
     "static/media/back-2.svg": "/redberry/static/media/back-2.d5f1d833387acdf87d3b1d63a058068e.svg",
     "static/media/back.svg": "/redberry/static/media/back.e704c0297c9e20c49e3af7cf559f9bf7.svg",
     "static/media/success.svg": "/redberry/static/media/success.035d0a2ec4e3fc2987c5b1aaf0082dc1.svg",
-    "main.5183b28f.css.map": "/redberry/static/css/main.5183b28f.css.map",
-    "main.efb11f45.js.map": "/redberry/static/js/main.efb11f45.js.map"
+    "main.960c6b1f.css.map": "/redberry/static/css/main.960c6b1f.css.map",
+    "main.d0f971ad.js.map": "/redberry/static/js/main.d0f971ad.js.map"
   },
   "entrypoints": [
-    "static/css/main.5183b28f.css",
-    "static/js/main.efb11f45.js"
+    "static/css/main.960c6b1f.css",
+    "static/js/main.d0f971ad.js"
   ]
 }
